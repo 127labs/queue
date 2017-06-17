@@ -24,15 +24,15 @@ defmodule Queue do
 
   def pop(queue) do
     case :queue.out(queue) do
-      {{:value, item}, new_queue} -> {item, new_queue}
-      {:empty, new_queue} -> {nil, new_queue}
+      {{:value, item}, new_queue} -> {:ok, item, new_queue}
+      {:empty, new_queue} -> {:error, :empty, new_queue}
     end
   end
 
   def pop_last(queue) do
     case :queue.out_r(queue) do
-      {{:value, item}, new_queue} -> {item, new_queue}
-      {:empty, new_queue} -> {nil, new_queue}
+      {{:value, item}, new_queue} -> {:ok, item, new_queue}
+      {:empty, new_queue} -> {:error, :empty, new_queue}
     end
   end
 
